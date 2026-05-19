@@ -243,7 +243,7 @@ jobs:
           #openclash 32
           $GITHUB_WORKSPACE/sh/openclash32.sh
           
-          #python3.patch.sh
+          #最后的更新设置
           if [[ "${DIY_P5_SH}" == *"false"* ]]; then
             echo "不需要执行此选项"
           else
