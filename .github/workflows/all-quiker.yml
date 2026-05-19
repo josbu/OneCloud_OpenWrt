@@ -130,8 +130,7 @@ jobs:
           else
              echo "没有选择编译任何类型"
              exit 1
-          fi
-        
+          fi        
         
     - name: 克隆源仓库
       working-directory: /workdir
@@ -253,8 +252,7 @@ jobs:
          
           #设置主路由
           OWRT_SERVER_IP=${OWRT_IP%.*}.1
-          $GITHUB_WORKSPACE/$DIY_P4_SH "${{ env.OWRT_IP }}" "$OWRT_SERVER_IP"
-          
+          $GITHUB_WORKSPACE/$DIY_P4_SH "${{ env.OWRT_IP }}" "$OWRT_SERVER_IP"          
         
     - name: 下载编译环境
       working-directory: ./openwrt
