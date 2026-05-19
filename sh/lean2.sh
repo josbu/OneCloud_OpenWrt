@@ -10,6 +10,8 @@ sed -i "s/hostname='.*'/hostname='$OWRT_NAME'/g" ./package/base-files/files/bin/
 sed -i "s/timezone='.*'/timezone='CST-8'/g" ./package/base-files/files/bin/config_generate
 sed -i "/timezone='.*'/a\\\t\t\set system.@system[-1].zonename='Asia/Shanghai'" ./package/base-files/files/bin/config_generate
 
+rm -rf feeds/packages/net/sing-box
+git clone https://github.com/sbwml/packages_lang_golang feeds/packages/lang/golang
 
 # Modify default NTP server
 echo 'Modify default NTP server...'
