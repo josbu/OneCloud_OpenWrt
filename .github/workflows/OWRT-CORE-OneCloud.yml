@@ -61,8 +61,8 @@ env:
   OWRT_TYPE: ${{inputs.OWRT_TYPE}}
   OWRT_LINUX: ${{inputs.OWRT_LINUX}}
   OWRT_FILES: ${{inputs.OWRT_FILES}}
-  DIY_P1_SH: ${{inputs.DIY_P1_SH}}
-  DIY_P2_SH: ${{inputs.DIY_P2_SH}}  
+  DIY_P1_SH: sh/${{inputs.DIY_P1_SH}}
+  DIY_P2_SH: sh/${{inputs.DIY_P2_SH}}  
   DIY_P3_SH: sh/false
   DIY_P4_SH: sh/openclash32.sh
   DIY_P5_SH: sh/false
@@ -224,12 +224,12 @@ jobs:
         working-directory: ./openwrt
         run: | 
           #更新到最新插件
-          $GITHUB_WORKSPACE/sh/$DIY_P1_SH
+          $GITHUB_WORKSPACE/$DIY_P1_SH
           echo "COMMIT_HASH=$(git rev-parse HEAD)" >> $GITHUB_ENV
           
           #通用设置和ssh登录图案
           curl -L -o package/base-files/files/etc/banner https://raw.githubusercontent.com/rmoyulong/AX6-Actions_Lede/master/ax6/cats_banner
-          $GITHUB_WORKSPACE/sh/$DIY_P2_SH
+          $GITHUB_WORKSPACE/$DIY_P2_SH
          
           #rm -rf feeds/kenzok8/{base-files,dnsmasq,firewall*,fullconenat,libnftnl,nftables,ppp,opkg,ucl,upx,vsftpd-alt,miniupnpd-iptables,wireless-regdb}
           if [[ "${DIY_P3_SH}" == *"false"* ]]; then
@@ -284,7 +284,7 @@ jobs:
           fi
           
           #openclash 32
-          $GITHUB_WORKSPACE/sh/openclash32.sh
+          $GITHUB_WORKSPACE/$DIY_P4_SH
           
           #python3.patch.sh
           if [[ "${DIY_P5_SH}" == *"false"* ]]; then
