@@ -44,7 +44,7 @@ env:
   DIY_P2_SH: sh/lean2.sh
   DIY_P3_SH: sh/false
   DIY_P4_SH: sh/edit_files.sh
-  DIY_P5_SH: sh/python3.patch.sh
+  DIY_P5_SH: sh/false
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
   UPLOAD_COWTRANSFER: false
@@ -171,7 +171,7 @@ jobs:
         dos2unix ./*.sh
         chmod +x ./*.sh          
         
-    - name: 设置订阅源
+    - name: 设置soc
       run: |
         [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
         
@@ -198,10 +198,6 @@ jobs:
           ls -l target/linux/amlogic
           echo "amlogic6.6"
         fi
-        
-        $GITHUB_WORKSPACE/$DIY_P1_SH
-        #echo 'src-git kiddin9 https://github.com/kiddin9/openwrt-packages' >> feeds.conf.default
-        echo "COMMIT_HASH=$(git rev-parse HEAD)" >> $GITHUB_ENV
  
     - name: 启动缓存[第二次起生效]
       uses: rmoyulong/cachewrtbuild@main
@@ -220,10 +216,14 @@ jobs:
     - name:  加载自定义配置
       working-directory: ./openwrt
       run: |          
+          #更新到最新插件
+          $GITHUB_WORKSPACE/sh/$DIY_P1_SH
+          echo "COMMIT_HASH=$(git rev-parse HEAD)" >> $GITHUB_ENV
+          
+          #通用设置和ssh登录图案
           curl -L -o package/base-files/files/etc/banner https://raw.githubusercontent.com/rmoyulong/AX6-Actions_Lede/master/ax6/cats_banner
-          $GITHUB_WORKSPACE/$DIY_P2_SH
+          $GITHUB_WORKSPACE/sh/$DIY_P2_SH
          
-          #删除冲突的插件 
           #rm -rf feeds/kenzok8/{base-files,dnsmasq,firewall*,fullconenat,libnftnl,nftables,ppp,opkg,ucl,upx,vsftpd-alt,miniupnpd-iptables,wireless-regdb}
           if [[ "${DIY_P3_SH}" == *"false"* ]]; then
             echo "不需要执行此选项"
