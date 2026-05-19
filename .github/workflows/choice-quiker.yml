@@ -45,6 +45,7 @@ env:
   DIY_P3_SH: sh/false
   DIY_P4_SH: sh/openclash32.sh
   DIY_P5_SH: sh/false
+  DIY_P6_SH: sh/edit_files.sh
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
   UPLOAD_COWTRANSFER: false
@@ -263,7 +264,7 @@ jobs:
           fi
           
           #设置主路由
-          $GITHUB_WORKSPACE/$DIY_P4_SH "${{ env.OWRT_IP }}" "${{ env.OWRT_SERVER_IP }}"
+          $GITHUB_WORKSPACE/$DIY_P6_SH "${{ env.OWRT_IP }}" "${{ env.OWRT_SERVER_IP }}"
           
           #web控制台去掉443监听补丁
           if [[ "${{ inputs.OWRT_TYPE }}" == *"OneCloud-docker"* ]]; then
