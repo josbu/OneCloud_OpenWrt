@@ -39,7 +39,7 @@ env:
   REPO_BRANCH: openwrt-24.10
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: Config/quicker.config
-  #DIY_P1_SH: sh/quick.sh
+  #DIY_P1_SH: Scripts/quick.sh
   DIY_P1_SH: Scripts/setup.sh
   DIY_P2_SH: Scripts/Settings.sh
   DIY_P3_SH: Scripts/false
@@ -302,9 +302,9 @@ jobs:
     - name: 制作直刷包
       run: |
           if [[ "${{ env.OWRT_brun_type }}" == "amlogic6.12" ]]; then
-            $GITHUB_WORKSPACE/sh/convert3.sh
+            $GITHUB_WORKSPACE/Scripts/convert3.sh
           else
-            $GITHUB_WORKSPACE/sh/convert2.sh
+            $GITHUB_WORKSPACE/Scripts/convert2.sh
           fi
           
     - name: 整理固件
