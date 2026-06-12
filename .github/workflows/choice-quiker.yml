@@ -167,7 +167,7 @@ jobs:
         
     - name: 检查脚本
       run: |
-        cd ./sh
+        cd ./Scripts
 
         dos2unix ./*.sh
         chmod +x ./*.sh          
