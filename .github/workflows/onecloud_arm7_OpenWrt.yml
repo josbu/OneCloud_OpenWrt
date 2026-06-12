@@ -115,7 +115,7 @@ jobs:
 
     - name: 检查脚本
       run: |
-        cd ./sh
+        cd ./Scripts
         
         dos2unix ./*.sh
         chmod +x ./*.sh        
@@ -124,9 +124,9 @@ jobs:
       run: |
         if [[ "${{ env.OWRT_burn_version }}"  == "2" ]]; then
           imgpath="https://github.com/rmoyulong/OneCloud_OpenWrt/releases/download/Docker_Latest/immortalwrt-meson-meson8b-thunder-onecloud-ext4-emmc.img.gz"
-          $GITHUB_WORKSPACE/sh/convert.sh $imgpath
+          $GITHUB_WORKSPACE/Scripts/convert.sh $imgpath
         else
-          $GITHUB_WORKSPACE/sh/convert.sh ${{ env.OWRT_burn_version }}
+          $GITHUB_WORKSPACE/Scripts/convert.sh ${{ env.OWRT_burn_version }}
         fi
 
     - name: 整理文件
